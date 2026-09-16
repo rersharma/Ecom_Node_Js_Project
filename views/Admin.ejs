@@ -1,0 +1,38 @@
+<%- include ('common/Admin_header.ejs') %>
+
+<div class="container mt-5">
+    <div class="row mt-5">
+
+         <div class="col-sm-5 offset-sm-3 p-3" style="border: 1px solid gray;">
+
+             <h1 class="text-center bg-primary p-2 text-white">Admin Panel</h1>
+
+             <form action="" method="post">
+     
+                 <div class="mt-2">
+                     <label for="email">Email-Id</label>
+                     <input type="email" name="email" id="email" required class="form-control">
+                 </div>
+
+                  <div class="mt-2">
+                     <label for="password">Password</label>
+                     <input type="password" name="password" id="password" required class="form-control">
+                 </div>
+
+                 <div class="mt-2">
+                     <button class="btn btn-primary">Submit</button>
+                 </div>
+             </form>
+
+              <div class="mt-2 text-center">
+                       <% if(locals.message){%>
+                            <h2><%=message%></h2>
+                       <%}%>
+              </div>
+         </div>
+
+    </div>
+</div>
+
+
+<%- include ('common/footer.ejs') %>
