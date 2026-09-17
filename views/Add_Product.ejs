@@ -1,0 +1,75 @@
+<%- include ('common/Admin_header.ejs') %>
+
+<div class="container mt-5 mb-5">
+
+    <div class="row mt-2">
+
+         <div class="col-sm-5 offset-sm-3 p-3" style="border: 1px solid gray;">
+
+             <h1 class="text-center bg-primary p-2 text-white">Add Product</h1>
+             <form action="/add_product" method="post" enctype="multipart/form-data">
+
+                 <div class="mt-2">
+                     <label id="pname">Product Name</label>
+                     <input type="text" name="pname" id="pname" required class="form-control">
+                 </div>
+
+                 <div class="mt-2">
+                     <label id="ptype">Product Type</label>
+                     <select name="ptype" id="ptype" required class="form-control">
+                        <option selected disabled value="">Select Product Type</option>
+                        <option>Grocery</option>
+                        <option>Electronic</option>
+                        <option>Cloth</option>
+                        <option>Furniture</option>
+                     </select>
+                 </div>
+
+                  <div class="mt-2">
+                     <label id="pprice">Product Price</label>
+                     <input type="number" name="pprice" id="pprice" required class="form-control">
+                 </div>
+
+                 <div class="mt-2">
+                     <label id="pstock">No of Stock Available</label>
+                     <input type="number" name="pstock" id="pprice" required class="form-control">
+                 </div>
+
+                  <div class="mt-2">
+                     <label id="pdiscount">Any Discount Offer(%)</label>
+                     <input type="number" name="pdiscount" id="pdiscount" required class="form-control">
+                 </div>
+
+                  <div class="mt-2">
+                     <label id="pphoto">Product Photo</label>
+                     <input type="file" name="pphoto" id="pphoto" required class="form-control">
+                 </div>
+
+                 <div class="mt-2">
+                     <label id="pdescription">Description</label>
+                     <textarea name="pdescription" id="pdescription" required class="form-control"></textarea>
+                 </div>
+
+                 <div class="mt-2">
+                     <input type="submit" name="button" value="Add Now"   required class="btn btn-primary">
+                 </div>
+             </form>
+
+              <div class="text-center mt-1 mb-1">
+                   <% if(locals.message) {%>
+                           <h3><%=message%></h3>
+                   <%}%>
+              </div>
+
+        </div>
+
+
+
+    </div>
+
+
+</div>
+
+
+
+<%- include ('common/footer.ejs') %>
