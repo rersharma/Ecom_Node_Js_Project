@@ -8,6 +8,8 @@ route.get('/about',basic_control.About_Page)
 route.get('/contact',basic_control.Contact_Page)
 route.use('/login',account_control.login_page)
 route.use('/signup',account_control.newuser)
+route.use('/dashboard',account_control.dashboard)
+route.get('/customer_logout',account_control.signout)
 
 
 

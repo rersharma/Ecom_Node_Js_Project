@@ -8,7 +8,29 @@ const login_page=(req,res)=>
        res.render('Login',{title:'Login'})
     }
     else{
-         
+           const data={
+            email:req.body.email,
+            password:req.body.password
+           }
+           signup.check_user(data,(err,result)=>
+         {
+             if(err)
+             {
+               res.render(err)
+             }
+             else 
+             {
+                  if(result.length==0)
+                  {
+                      res.render('Login',{title:'Login',message:'Invalid Login Credentials'})
+                  }
+                  else 
+                  {
+                     req.session.useremail=data.email
+                     res.redirect('/dashboard')
+                  }
+             }
+         })
     }
 }
 
@@ -44,13 +66,25 @@ const newuser=(req,res)=>
 }
 const dashboard=(req,res)=>
 {
-      if(req.method=='GET'){
-         res.render('Dashboard',{title:'Dashboard'})
-      }
+   if(!req.session.useremail)
+   {
+         res.render('Login',{title:'Login',message:'Login First...'})
+   }
+   else 
+   {
+        res.render('customer_dashboard',{title:'Dashboard'})
+   }
 }
+
+const signout=(req,res)=>{
+      req.session.destroy()
+      res.render('Login',{title:'Login',message:'Logout Successfully'})
+}
+
 
 module.exports={
     login_page,
     newuser,
-    dashboard
+    dashboard,
+    signout
 }
