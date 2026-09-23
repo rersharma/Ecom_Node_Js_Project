@@ -12,6 +12,14 @@ myapp.use(session({
     resave:false,
     saveUninitialize: false
 }))
+
+myapp.use(session({
+    secret:"adminemail",
+    resave:false,
+    saveUninitialize: false
+}))
+
+
 myapp.use(body_parser.urlencoded({extended:true})) // collect the form data any page
 
 myapp.use("/static",main.static('static')) //requesting static folder for css,js and images
