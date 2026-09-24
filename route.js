@@ -2,7 +2,22 @@ const express=require('express') //framework for node.js
 const route=express.Router() //router for express
 
 const multer=require('multer') //for image upload
-const path=require('path') // for image upload
+const path=require('path')
+
+const stroage=multer.diskStorage({
+    destination:function(req,file,cb){
+        cb(null,'product_photo/');
+    },
+    filename:function(req,file,cb){
+        const uniquename=Date.now()+ '-' + file.originalname;
+        cb(null,uniquename)
+    }
+})
+
+const upload=multer({
+    storage:stroage
+})
+
 
 const basic_control=require('./controller/Basic_Page_Controller')
 const account_control=require('./controller/Account_Controller')
@@ -25,9 +40,6 @@ route.get('/admin_dash',admin_control.admin_dashboard)
 route.get('/admin_logout',admin_control.admin_logout)
 
 //-----------------------Product Code-------------------------
-route.use('/add_product',product_control.Addproduct)
-
-
-
+route.use('/add_product',upload.single('pphoto'),product_control.Addproduct)
 
 module.exports=route

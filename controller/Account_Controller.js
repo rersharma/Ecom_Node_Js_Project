@@ -16,7 +16,8 @@ const login_page=(req,res)=>
          {
              if(err)
              {
-               res.render(err)
+               console.error(err)
+               return res.status(500).render('Login',{title:'Login',message:'Database error. Please try again.'})
              }
              else 
              {

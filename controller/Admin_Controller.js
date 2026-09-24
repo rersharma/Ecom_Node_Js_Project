@@ -18,7 +18,8 @@ const admin_login_check=(req,res)=>
         {
              if(err)
              {
-                 res.render(err)
+                 console.error(err)
+                 return res.status(500).render('Admin',{title:'Admin-Cpanel',message:'Database error. Please try again.'})
              }
              if(result.length==0)
              {

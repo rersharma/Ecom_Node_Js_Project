@@ -15,14 +15,26 @@ const Addproduct=(req,res)=>
           }
           else 
           {
-            productdata={
+            if(!req.file)
+            {
+                return res.render('Add_Product',{title:'Add Product',message:'Please select a product photo'})
+            }
 
+            const productdata={
+                  name:req.body.pname,
+                  type:req.body.ptype,
+                  price:req.body.pprice,
+                  stock:req.body.pstock,
+                  discount:req.body.pdiscount,
+                  photo:req.file.filename,
+                  description:req.body.pdescription
             }
              productmodel.addproducts(productdata,(err)=>
             {
                  if(err)
                  {
-                     res.render(err)
+                     console.error(err)
+                     return res.status(500).render('Add_Product',{title:'Add Product',message:'Failed to add product. Please try again.'})
                  }
                  else
                  {

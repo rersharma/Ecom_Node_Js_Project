@@ -10,19 +10,20 @@ myapp.set('view engine', 'ejs') // find views folder and render ejs files
 myapp.use(session({
     secret:"useremail",
     resave:false,
-    saveUninitialize: false
+    saveUninitialized: false
 }))
 
 myapp.use(session({
     secret:"adminemail",
     resave:false,
-    saveUninitialize: false
+    saveUninitialized: false
 }))
 
 
 myapp.use(body_parser.urlencoded({extended:true})) // collect the form data any page
 
 myapp.use("/static",main.static('static')) //requesting static folder for css,js and images
+myapp.use("/product_photo",main.static('product_photo'))
 
 myapp.use('/',route) //requesting route.js file for routing
 
