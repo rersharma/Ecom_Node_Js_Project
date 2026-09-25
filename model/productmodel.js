@@ -6,6 +6,20 @@ const addproducts=(productdata,callback)=>
   db.query(sql,callback)
 }
 
+const view_product=(callback)=>
+{
+   const sql="select * from product"
+   db.query(sql,callback)
+}
+
+const delpro=(pid,callback)=>
+{
+  const sql=`delete from product where id='${pid}'`
+  db.query(sql,callback)
+}
+
 module.exports={
-    addproducts
+    addproducts,
+    view_product,
+    delpro
 }

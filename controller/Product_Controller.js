@@ -45,6 +45,54 @@ const Addproduct=(req,res)=>
       }
 }
 
+const manage_product=(req,res)=>
+{
+       if(!req.session.adminemail)
+      {
+         res.render('Admin',{title:'Admin-Cpanel',message:'Login First.....'})
+      }
+      else 
+      {
+             productmodel.view_product((err,result)=>
+            {
+                 if(err){
+                    res.render(err)
+                 }
+                 else 
+                 {
+                      res.render('Manage_Product',{title:"Manage Product",record:result})
+                 }
+            })
+      }
+}
+const delete_product=(req,res)=>
+{
+       if(!req.session.adminemail)
+      {
+         res.render('Admin',{title:'Admin-Cpanel',message:'Login First.....'})
+      }
+      else 
+      {
+        const pid=req.params.id
+        productmodel.delpro(pid,(err)=>
+        {
+            if(err)
+            {
+                 res.render(err)
+            }
+            else 
+            {
+                 res.redirect('/Manage_product')
+            }
+        })
+
+      }
+}
+
+
+
 module.exports={
-    Addproduct
+    Addproduct,
+    manage_product,
+    delete_product
 }
