@@ -88,11 +88,70 @@ const delete_product=(req,res)=>
 
       }
 }
+const update_product=(req,res)=>
+{
+     if(!req.session.adminemail)
+      {
+         res.render('Admin',{title:'Admin-Cpanel',message:'Login First.....'})
+      }
+      else 
+      {
+        if(req.file)
+        {
+           productdata={
+                id:req.body.pid,
+                name:req.body.pname,
+                type:req.body.ptype,
+                price:req.body.pprice,
+                stock:req.body.pstock,
+                discount:req.body.pdiscount,
+                photo:req.file.filename,
+                description:req.body.pdescription
+            }
+            productmodel.updatepro(productdata,(err)=>
+            {
+                 if(err)
+                 {
+                     console.log(err)
+                 }
+                 else 
+                 {
+                      res.redirect('/Manage_product')
+                 }
+            })
+        }
+        else 
+        {
+           productdata2={
+             id:req.body.pid,
+             name:req.body.pname,
+             type:req.body.ptype,
+             price:req.body.pprice,
+             stock:req.body.pstock,
+             discount:req.body.pdiscount,
+             description:req.body.pdescription
+           }
+           productmodel.updatepro2(productdata2,(err)=>
+            {
+                 if(err)
+                 {
+                     console.log(err)
+                 }
+                 else 
+                 {
+                      res.redirect('/Manage_product')
+                 }
+            })
+           
+        }
+      }
+}
 
 
 
 module.exports={
     Addproduct,
     manage_product,
-    delete_product
+    delete_product,
+    update_product
 }

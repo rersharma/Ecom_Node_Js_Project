@@ -33,7 +33,7 @@
                                                        <td> <%=item.description%> </td>
                                                         <td> 
                                                              <a href="/delete_product/<%=item.id%>" onclick="return confirm('Are You Sure?');" class="btn btn-danger">Delete</a>
-                                                             <a href="" class="btn btn-primary">Update</a>
+                                                             <a href="" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#productmodal" onclick="set_value('<%=item.id%>','<%=item.name%>','<%=item.type%>','<%=item.price%>','<%=item.no_stock%>','<%=item.discount%>','product_photo/<%=item.photo%>','<%=item.description%>');">Update</a>
                                                         </td>
                                             </tr>
                                         
@@ -45,5 +45,83 @@
 </div>
 
 
+<!-- Modal -->
+<div class="modal fade" id="productmodal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Manage Product</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        
+             <form action="/update_product" method="post" enctype="multipart/form-data">
+              <input type="hidden" name="pid" id="pid">
+               <div class="mt-2">
+                     <label for="pname">Product Name</label>
+                     <input type="text" name="pname" id="pname" required class="form-control">
+                 </div>
+
+                 <div class="mt-2">
+                     <label for="ptype">Product Type</label>
+                     <select name="ptype" id="ptype" required class="form-control">
+                        <option selected disabled value="">Select Product Type</option>
+                        <option>Grocery</option>
+                        <option>Electronic</option>
+                        <option>Cloth</option>
+                        <option>Furniture</option>
+                     </select>
+                 </div>
+
+                  <div class="mt-2">
+                     <label for="pprice">Product Price</label>
+                     <input type="number" name="pprice" id="pprice" required class="form-control">
+                 </div>
+
+                 <div class="mt-2">
+                     <label for="pstock">No of Stock Available</label>
+                     <input type="number" name="pstock" id="pstock" required class="form-control">
+                 </div>
+
+                  <div class="mt-2">
+                     <label for="pdiscount">Any Discount Offer(%)</label>
+                     <input type="number" name="pdiscount" id="pdiscount" required class="form-control">
+                 </div>
+
+                  <div class="mt-2">
+                     <label for="pphoto">Product Photo</label>
+                     <input type="file" name="pphoto" id="pphoto"  class="form-control">
+                     <img src="" name="myimage" id="myimage" width="40" height="40">
+                 </div>
+
+                 <div class="mt-2">
+                     <label for="pdescription">Description</label>
+                     <textarea name="pdescription" id="pdescription" required class="form-control"></textarea>
+                 </div>
+
+                 <div class="mt-2">
+                     <input type="submit" name="button" value="Update Now"   required class="btn btn-primary">
+                 </div>
+
+
+             </form>
+      </div>
+  
+    </div>
+  </div>
+</div>
+
+<script>
+   function set_value(id, name, type, price, stock, discount, photo, description) {
+    document.getElementById("pid").value = id;
+    document.getElementById("pname").value = name;
+    document.getElementById("ptype").value = type;
+    document.getElementById("pprice").value = price;
+    document.getElementById("pstock").value = stock;
+    document.getElementById("pdiscount").value = discount;
+    document.getElementById("pdescription").value = description;
+    document.getElementById("myimage").src = photo;
+}
+</script>
 
 <%- include ('common/footer.ejs') %>

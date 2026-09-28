@@ -43,5 +43,6 @@ route.get('/admin_logout',admin_control.admin_logout)
 route.use('/add_product',upload.single('pphoto'),product_control.Addproduct)
 route.use('/Manage_product',product_control.manage_product)
 route.use('/delete_product/:id',product_control.delete_product)
+route.use('/update_product',upload.single('pphoto'),product_control.update_product)
 
 module.exports=route

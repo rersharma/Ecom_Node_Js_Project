@@ -18,8 +18,21 @@ const delpro=(pid,callback)=>
   db.query(sql,callback)
 }
 
+const updatepro=(productdata,callback)=>
+{
+     const sql=`update  product set name='${productdata.name}',type='${productdata.type}',price='${productdata.price}',no_stock='${productdata.stock}',discount='${productdata.discount}',photo='${productdata.photo}',description='${productdata.description}' where id='${productdata.id}'`
+     db.query(sql,callback)
+}
+const updatepro2=(productdata,callback)=>
+{
+      const sql=`update product set name='${productdata.name}',type='${productdata.type}',price='${productdata.price}',no_stock='${productdata.stock}',discount='${productdata.discount}',description='${productdata.description}' where id='${productdata.id}'`
+     db.query(sql,callback)
+}
+
 module.exports={
     addproducts,
     view_product,
-    delpro
+    delpro,
+    updatepro,
+    updatepro2
 }
