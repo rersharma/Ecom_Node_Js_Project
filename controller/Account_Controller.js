@@ -1,6 +1,6 @@
 
 const signup=require('../model/usermodel')
-
+const product=require('../model/productmodel')
 
 const login_page=(req,res)=>
 {
@@ -73,7 +73,18 @@ const dashboard=(req,res)=>
    }
    else 
    {
-        res.render('customer_dashboard',{title:'Dashboard'})
+         product.view_product((err,result)=>
+        {
+            if(err)
+            {
+                 res.render(err)
+            }
+            else 
+            {
+               res.render('customer_dashboard',{title:'Dashboard',record:result})
+            }
+        })
+        
    }
 }
 
@@ -82,10 +93,27 @@ const signout=(req,res)=>{
       res.render('Login',{title:'Login',message:'Logout Successfully'})
 }
 
+const display_customer=(req,res)=>
+{
+    signup.get_data((err,result)=>
+    {
+        if(err)
+        {
+             res.render(err)
+        }
+        else 
+        {
+             res.render('Manage_user',{title:'Manage Users',record:result})
+        }
+    })
+}
+
+
 
 module.exports={
     login_page,
     newuser,
     dashboard,
-    signout
+    signout,
+    display_customer
 }

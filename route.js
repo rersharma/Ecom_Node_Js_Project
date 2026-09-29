@@ -45,4 +45,8 @@ route.use('/Manage_product',product_control.manage_product)
 route.use('/delete_product/:id',product_control.delete_product)
 route.use('/update_product',upload.single('pphoto'),product_control.update_product)
 
+// -------------------------Customer---------------------------
+
+route.use('/manage_customer',account_control.display_customer)
+
 module.exports=route

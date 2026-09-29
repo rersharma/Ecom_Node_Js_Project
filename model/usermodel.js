@@ -13,9 +13,15 @@ const check_user=(userdata,callback)=>
    db.query(sql,callback)
 }
 
+const get_data=(callback)=>
+{
+      const sql=`select * from newuser`
+      db.query(sql,callback)
+}
 
 
 module.exports={
     create_user,
-    check_user
+    check_user,
+    get_data
 }
