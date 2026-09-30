@@ -13,7 +13,10 @@
                         <h5 class="text-center"><%=item.name%></h5>
                         <div class="text-center">
                           <h6><%=item.price%> Rs.</h6>
-                        <a href="#" class="btn btn-primary">Buy Now</a>
+                          <form action="/detail_product" method="post">
+                              <input type="hidden" name="pid" value="<%=item.id%>">
+                              <button class="btn btn-primary">Buy Now</button>
+                           </form>
                         </div>
                     </div>
                 </div>

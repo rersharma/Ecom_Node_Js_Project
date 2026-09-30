@@ -1,0 +1,37 @@
+<%- include ('common/customer_header.ejs') %>
+
+
+<div class="container mt-5">
+     <div class="row mt-5">
+        <h2 class="text-center text-primary">Product Details</h2>
+         <div class="col-sm-6 mt-5">
+         <img src="product_photo/<%=data[0].photo%>" class="img-fluid">
+         </div>
+         <div class="col-sm-4 mt-5">
+
+             <div class="card">
+                    <div class="card-header">
+                        <%=data[0].name%>
+                    </div>
+                    <div class="card-body">
+                        <h3 class="card-title"><%=data[0].price%> Rs</h3>
+                        <h3 class="card-title"><%=data[0].type%></h3>
+                        <h6 style="color:gray" class="card-title"><%=data[0].discount%> % discount availabe</h6>
+                        <p class="card-text"><%=data[0].description%></p>
+                        <form action="/odernow" class="mt-2" method="post">
+                            <input type="hidden" name="pid" value="<%=data[0].id%>">
+                            <div class="mt-2">
+                                <label>No of Qunatity</label>
+                                <input type="number" name="qnty" required value="1" class="form-control">
+                                <button class="btn btn-success mt-2">Order Now</button>
+                           </div>
+                        </form>
+                    </div>
+                </div>
+              
+         </div>
+     </div>
+</div>
+
+
+<%- include ('common/footer.ejs') %>

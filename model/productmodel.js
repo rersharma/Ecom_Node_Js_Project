@@ -28,11 +28,17 @@ const updatepro2=(productdata,callback)=>
       const sql=`update product set name='${productdata.name}',type='${productdata.type}',price='${productdata.price}',no_stock='${productdata.stock}',discount='${productdata.discount}',description='${productdata.description}' where id='${productdata.id}'`
      db.query(sql,callback)
 }
+const product_info=(pid,callback)=>
+{
+   const sql=`select * from product where id='${pid}'`
+   db.query(sql,callback)
+}
 
 module.exports={
     addproducts,
     view_product,
     delpro,
     updatepro,
-    updatepro2
+    updatepro2,
+    product_info
 }

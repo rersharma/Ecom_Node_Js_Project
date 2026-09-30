@@ -1,6 +1,28 @@
 <%- include ('common/customer_header.ejs') %>
 
+<div class="container mt-5">
 
+ <div class="row mt-5">
 
+    <h2 class="text-center text-primary">My Profile</h2>
+
+     <div class="col-sm-4 mt-5 offset-sm-4">
+          
+        <div class="card" style="width: 18rem;">
+            <div class="card-header bg-primary text-white">
+                <%=data[0].name%>
+            </div>
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item"> <%=data[0].email%></li>
+                <li class="list-group-item"><%=data[0].gender%></li>
+                <li class="list-group-item"><%=data[0].mobile%></li>
+                 <li class="list-group-item"><%=data[0].state%></li>
+                  <li class="list-group-item"><%=data[0].address%></li>
+            </ul>
+        </div>
+
+     </div>
+ </div>
+</div>
 
 <%- include ('common/footer.ejs') %>

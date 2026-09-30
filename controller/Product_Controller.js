@@ -147,11 +147,35 @@ const update_product=(req,res)=>
       }
 }
 
+const detail_product=(req,res)=>
+{
+     if(!req.session.useremail)
+   {
+         res.render('Login',{title:'Login',message:'Login First...'})
+   }
+   else 
+   {
+         const pid=req.body.pid 
+       productmodel.product_info(pid,(err,result)=>
+        {
+             if(err)
+             {
+                 res.render(err)
+             }
+             else 
+             {
+                res.render('product_info',{title:'Detail Product',data:result})
+             }
+        })
+   }
+}
+
 
 
 module.exports={
     Addproduct,
     manage_product,
     delete_product,
-    update_product
+    update_product,
+    detail_product,
 }

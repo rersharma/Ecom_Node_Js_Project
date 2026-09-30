@@ -48,5 +48,6 @@ route.use('/update_product',upload.single('pphoto'),product_control.update_produ
 // -------------------------Customer---------------------------
 
 route.use('/manage_customer',account_control.display_customer)
-
+route.use('/customer_Profile',account_control.customer_Profile)
+route.use('/detail_product',product_control.detail_product)
 module.exports=route

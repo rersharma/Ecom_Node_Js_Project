@@ -18,10 +18,17 @@ const get_data=(callback)=>
       const sql=`select * from newuser`
       db.query(sql,callback)
 }
+const myprofile=(email,callback)=>
+{
+   const sql=`select * from newuser where email='${email}'`
+   db.query(sql,callback)
+   
+}
 
 
 module.exports={
     create_user,
     check_user,
-    get_data
+    get_data,
+    myprofile
 }

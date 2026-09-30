@@ -93,6 +93,29 @@ const signout=(req,res)=>{
       res.render('Login',{title:'Login',message:'Logout Successfully'})
 }
 
+const customer_Profile=(req,res)=>
+{
+     if(!req.session.useremail)
+   {
+         res.render('Login',{title:'Login',message:'Login First...'})
+   }
+   else 
+   {
+        const useremail=req.session.useremail
+        signup.myprofile(useremail,(err,result)=>
+        {
+              if(err)
+              {
+                 res.render(err)
+              }
+              else 
+              {
+                 res.render('customer_profile',{title:'My Profile',data:result})
+              }
+        })
+   }
+}
+
 const display_customer=(req,res)=>
 {
     signup.get_data((err,result)=>
@@ -115,5 +138,6 @@ module.exports={
     newuser,
     dashboard,
     signout,
-    display_customer
+    display_customer,
+    customer_Profile
 }
