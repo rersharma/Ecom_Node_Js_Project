@@ -170,6 +170,73 @@ const detail_product=(req,res)=>
    }
 }
 
+const order_now=(req,res)=>
+{
+         if(!req.session.useremail)
+          {
+               res.render('Login',{title:'Login',message:'Login First...'})
+          }
+          else{
+                const pid=req.body.pid 
+                const qnty=req.body.qnty
+                productmodel.product_info(pid,(err,result)=>
+                {
+                     if(err)
+                     {
+                         res.render(err)
+                     }
+                     else 
+                     {
+                         const data={
+                         pid:result[0].id,
+                         qnty:qnty,
+                         ptype:result[0].type,
+                         pname:result[0].name,
+                         pprice:result[0].price,
+                         pphoto:result[0].photo,
+                         total_price:parseInt(result[0].price)*parseInt(req.body.qnty),
+                         customer_email:req.session.useremail
+                         }
+                         productmodel.take_order(data,(err)=>
+                         {
+                              if(err)
+                              {
+                                  res.render(err)
+                              }
+                              else 
+                              {
+                                  res.render('order_success',{title:'Order Success',message:'Your order has been placed successfully!'})
+                              }
+                         })
+                    }
+
+                     })
+                }
+          }
+
+          const customer_order=(req,res)=>
+          {
+               if(!req.session.useremail)
+               {
+                    res.render('Login',{title:'Login',message:'Login First...'})
+               }
+               else{
+    
+                       const email=req.session.useremail
+                       productmodel.cust_order(email,(err,result)=>{
+                         if(err)
+                         {
+                               res.render(err)
+                         }
+                         else 
+                         {
+                              res.render('customer_order',{title:'My Order',record:result})
+                         }
+
+                       })
+
+               }
+          }
 
 
 module.exports={
@@ -178,4 +245,6 @@ module.exports={
     delete_product,
     update_product,
     detail_product,
+    customer_order,
+    order_now
 }

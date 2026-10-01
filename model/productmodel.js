@@ -33,6 +33,19 @@ const product_info=(pid,callback)=>
    const sql=`select * from product where id='${pid}'`
    db.query(sql,callback)
 }
+const take_order=(orderdata,callback)=>
+{
+    const sql=`insert into myorder(customer_email,pid,pname,ptype,buy_qnty,product_price,total_price,product_photo)values('${orderdata.customer_email}','${orderdata.pid}','${orderdata.pname}','${orderdata.ptype}','${orderdata.qnty}','${orderdata.pprice}','${orderdata.total_price}','${orderdata.pphoto}')`
+
+    db.query(sql,callback)
+}
+
+const cust_order=(email,callback)=>
+{
+    const sql=`select * from myorder where customer_email='${email}'`
+    db.query(sql,callback)
+}
+
 
 module.exports={
     addproducts,
@@ -40,5 +53,7 @@ module.exports={
     delpro,
     updatepro,
     updatepro2,
-    product_info
+    product_info,
+    take_order,
+    cust_order
 }
