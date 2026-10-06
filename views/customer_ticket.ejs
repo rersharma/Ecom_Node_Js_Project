@@ -2,8 +2,9 @@
 
 
 <div class="container mt-5 mb-5">
+   <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#ticketmodal">New Ticket</button>
      <div class="row">
-        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#ticketmodal">New Ticket</button>
+       
           <div class="col-sm-12 mt-2">
             
             <h1 class="text-center bg-primary p-2 text-white">Customer Ticket ( Enquiry) </h1>
@@ -12,16 +13,33 @@
                             <thead>
                                 <tr>
                                     <th scope="col">ID</th>
-                                    <th scope="col">Customer Name</th>
                                     <th scope="col">Email-Id</th>
-                                    <th scope="col">Mobile</th>
+                                    <th scope="col">Subject</th>
                                     <th scope="col">Customer Query</th>
+                                    <th scope="col">My Reply</th>
                                     <th scope="col">Admin Reply</th>
                                     <th scope="col">Action</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                          
+                                      
+                              <% record.forEach((item)=>{%>
+                                            <tr>
+                                                <td> <%=item.id%> </td>
+                                                 <td> <%=item.email%> </td>
+                                                  <td> <%=item.subject%> </td>
+                                                   <td> <%=item.query%> </td>
+                                                    <td> <%=item.cust_reply%> </td>
+                                                     <td> <%=item.admin_reply%> </td>
+                                                        <td> 
+                                                             <a href="/delete_tickets/<%=item.id%>" onclick="return confirm('Are You Sure?');" class="btn btn-danger">Delete</a>
+                                                             <a href="" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#replymodal">Reply</a>
+                                                        </td>
+                                            </tr>
+                                        
+                                        <% }) %>
+                              
+
                             </tbody>
                     </table>
 
@@ -33,19 +51,27 @@
 
 
 <!-- Modal -->
-<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="ticketmodal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+        <h1 class="modal-title fs-5" id="exampleModalLabel">New Ticket</h1>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        ...
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
+         <form action="/add_ticket" method="post">
+               <div class="mt-2">
+                     <label for="subject">Subject</label>
+                     <input type="text" name="subject" id="subject" class="form-control" required>
+                </div>
+                <div class="mt-2">
+                     <label for="query">Query</label>
+                     <textarea name="query" id="query" class="form-control" required></textarea>
+                </div>
+                <div class="mt-2">
+                   <button type="submit" class="btn btn-primary">Submit</button>
+                </div>
+         </form>
       </div>
     </div>
   </div>

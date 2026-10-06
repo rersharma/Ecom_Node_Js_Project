@@ -23,7 +23,8 @@ const basic_control=require('./controller/Basic_Page_Controller')
 const account_control=require('./controller/Account_Controller')
 const admin_control=require('./controller/Admin_Controller')
 const product_control=require('./controller/Product_Controller')
-
+const Help_control=require('./controller/Help_Controller')
+  
 //------------------User Code
 
 route.get('/',basic_control.Home_page)
@@ -52,4 +53,7 @@ route.use('/customer_Profile',account_control.customer_Profile)
 route.use('/detail_product',product_control.detail_product)
 route.use('/odernow',product_control.order_now)
 route.use('/customer_order',product_control.customer_order)
+route.use('/customer_ticket',Help_control.myenquiry)
+route.use('/add_ticket',Help_control.add_ticket)
+route.use('/Enquiry',Help_control.List_enquiry)
 module.exports=route
