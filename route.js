@@ -56,4 +56,8 @@ route.use('/customer_order',product_control.customer_order)
 route.use('/customer_ticket',Help_control.myenquiry)
 route.use('/add_ticket',Help_control.add_ticket)
 route.use('/Enquiry',Help_control.List_enquiry)
+route.use('/customer_reply',Help_control.customer_reply)
+route.use('/admin_reply',Help_control.admin_reply)
+route.use('/delete_tickets/:id',Help_control.delete_ticket)
+route.use('/delete_admin_tickets/:id',Help_control.delete_ticket_admin)
 module.exports=route

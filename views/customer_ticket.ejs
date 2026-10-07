@@ -33,7 +33,7 @@
                                                      <td> <%=item.admin_reply%> </td>
                                                         <td> 
                                                              <a href="/delete_tickets/<%=item.id%>" onclick="return confirm('Are You Sure?');" class="btn btn-danger">Delete</a>
-                                                             <a href="" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#replymodal">Reply</a>
+                                                             <a href="" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#replymodal" onclick="set_value('<%=item.id%>','<%=item.cust_reply%>');">Reply</a>
                                                         </td>
                                             </tr>
                                         
@@ -77,5 +77,40 @@
   </div>
 </div>
 
+
+
+<!-- Modal -->
+<div class="modal fade" id="replymodal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Reply Window</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+           <form action="/customer_reply" method="post">
+              <input type="hidden" name="id" id="id">
+               <div class="mt-2">
+                     <label for="cust_reply">Reply</label>
+                     <textarea name="cust_reply" id="cust_reply" class="form-control" required></textarea>
+                </div>
+                <div class="mt-2">
+                   <button type="submit" class="btn btn-primary">Submit</button>
+                </div>
+            </form>
+      </div>
+      
+    </div>
+  </div>
+</div>
+
+<script>
+     
+    function set_value(id,reply)
+    {
+        document.getElementById('id').value=id;
+        document.getElementById('cust_reply').value=reply;
+    }
+</script>
 
 <%- include ('common/footer.ejs') %>

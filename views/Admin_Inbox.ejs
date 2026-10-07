@@ -29,8 +29,8 @@
                                                     <td> <%=item.cust_reply%> </td>
                                                      <td> <%=item.admin_reply%> </td>
                                                         <td> 
-                                                             <a href="/delete_tickets/<%=item.id%>" onclick="return confirm('Are You Sure?');" class="btn btn-danger">Delete</a>
-                                                             <a href="" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#replymodal">Admin Reply</a>
+                                                             <a href="/delete_admin_tickets/<%=item.id%>" onclick="return confirm('Are You Sure?');" class="btn btn-danger">Delete</a>
+                                                             <a href="" class="btn btn-primary" onclick="set_admin_value('<%=item.id%>','<%=item.admin_reply%>');"  data-bs-toggle="modal" data-bs-target="#replymodal">Admin Reply</a>
                                                         </td>
                                             </tr>
                                         
@@ -44,5 +44,42 @@
      </div>
 </div>
 
+
+
+<!-- Modal -->
+<div class="modal fade" id="replymodal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Admin Reply window</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+         <form action="/admin_reply" method="post">
+             <input type="hidden" name="id" id="id">
+              <div class="form-group">
+                <label for="admin_reply">Admin Reply</label>
+                <textarea name="admin_reply" id="admin_reply" class="form-control" required></textarea>
+              </div>
+              <div class="mt-2">
+                <button type="submit" class="btn btn-primary">Submit</button>
+              </div>
+         </form>
+      </div>
+     
+    </div>
+  </div>
+</div>
+
+
+<script>
+     
+     
+    function set_admin_value(id,reply)
+    {
+        document.getElementById('id').value=id;
+        document.getElementById('admin_reply').value=reply;
+    }
+</script>
 
 <%- include ('common/footer.ejs') %>
